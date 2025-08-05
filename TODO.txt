@@ -1,0 +1,22 @@
+Tasks Breakdown
+Day	Task
+1	Setup folder, boilerplate HTML, link JS and CSS
+2	Implement task adding (input + button click)
+3	Implement marking complete (toggle)
+4	Implement delete function
+5	Implement localStorage read/write
+6	Implement task count display
+7	Refactor JS into functions, clean code, deploy to GitHub Pages
+Test Criteria (Must Pass)
+
+    Reloading the page doesn’t erase tasks
+
+    Each task has a checkbox and delete button
+
+    Counter reflects completed/total tasks
+
+    No duplicate tasks unless intentional
+
+    Code is in one JS file, modularized by function
+
+    Deployed and link submitted
