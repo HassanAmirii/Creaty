@@ -51,20 +51,15 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
+    // implementing task completion counter
     const CheckState = document.querySelectorAll(".CheckState");
     CheckState.forEach(function (checkItem) {
       checkItem.addEventListener("change", (e) => {
         let taskCounter = 0;
-        CheckState.forEach(function (checkItem) {
-          if (checkItem.checked) {
-            taskCounter += 1;
-            taskCount.innerHTML = `<p> ${taskCounter}/ ${CheckState.length}  task completed </p>
-`;
-          } else {
-            taskCount.innerHTML = `<p> ${taskCounter} tasks completed </p>
-`;
-          }
+        CheckState.forEach((checkItem) => {
+          if (checkItem.checked) taskCounter++;
         });
+        taskCount.innerHTML = `${taskCounter} / ${CheckState.length} tasks completed`;
       });
     });
   }
