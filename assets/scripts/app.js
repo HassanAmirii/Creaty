@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const messageBox = document.getElementById("messageBox");
   const taskBox = document.getElementById("taskBox");
   const form = document.getElementById("form");
+  const taskCount = document.getElementById("taskCount");
 
   // show available task
   renderTask();
@@ -40,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .join("");
     taskBox.innerHTML = arrangeGetTask;
+    messageBox.innerHTML = "";
     const allTask = document.querySelectorAll(".deleteBtn");
     allTask.forEach((btn) => {
       btn.addEventListener("click", (e) => {
@@ -56,6 +58,5 @@ document.addEventListener("DOMContentLoaded", () => {
     taskList.splice(index, 1);
     localStorage.setItem("newTask", JSON.stringify(taskList));
     renderTask();
-    window.location.reload();
   }
 });
