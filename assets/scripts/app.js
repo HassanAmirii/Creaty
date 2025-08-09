@@ -48,6 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
   allTask.forEach(function (btn) {
     btn.addEventListener("click", (e) => {
       const index = Number(btn.dataset.index);
+      const fromStorage = JSON.parse(localStorage.getItem("newTask"));
+      console.log(fromStorage);
     });
   });
 
