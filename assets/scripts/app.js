@@ -47,11 +47,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   allTask.forEach(function (btn) {
     btn.addEventListener("click", (e) => {
-      const index = Number(btn.dataset.index);
-      const fromStorage = JSON.parse(localStorage.getItem("newTask"));
-      console.log(fromStorage);
+      deleteTask(Number(btn.dataset.index));
     });
   });
 
   // Get task from storage delete selected one and show the rest on screen
+
+  function deleteTask(index) {
+    const fromStorage = localStorage.getItem("newTask");
+    let taskList = fromStorage ? JSON.parse(fromStorage) : [];
+    taskList.splice(index, 1);
+    localStorage.setItem("newTask", JSON.stringify(taskList));
+    renderTask();
+    window.location.reload();
+  }
 });
