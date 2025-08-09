@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // show available task
   renderTask();
-  const allTask = document.querySelectorAll(".deleteBtn");
 
   // listen and render new  task submission
 
@@ -43,13 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
       .join("");
     // render task on screen
     taskBox.innerHTML = arrangeGetTask;
-  }
-
-  allTask.forEach(function (btn) {
-    btn.addEventListener("click", (e) => {
-      deleteTask(Number(btn.dataset.index));
+    const allTask = document.querySelectorAll(".deleteBtn");
+    allTask.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        deleteTask(Number(btn.dataset.index));
+      });
     });
-  });
+  }
 
   // Get task from storage delete selected one and show the rest on screen
 
