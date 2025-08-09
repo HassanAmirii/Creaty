@@ -34,13 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderTask() {
     const getTask = JSON.parse(localStorage.getItem("newTask"));
     console.log(getTask);
-    // manipulate the above objects list, add check box, delete button, and arrange each object as a list
     const arrangeGetTask = getTask
       .map(function (taskItem, index) {
         return `<p><input class="CheckState" data-index =${index} type="checkbox"> ${taskItem.task} <button data-index =${index} class="deleteBtn">delete</button></p>`;
       })
       .join("");
-    // render task on screen
     taskBox.innerHTML = arrangeGetTask;
     const allTask = document.querySelectorAll(".deleteBtn");
     allTask.forEach((btn) => {
@@ -50,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Get task from storage delete selected one and show the rest on screen
+  // Get task from storage > delete selected one >  show the rest on screen
 
   function deleteTask(index) {
     const fromStorage = localStorage.getItem("newTask");
