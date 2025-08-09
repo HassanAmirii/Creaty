@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // show available task
   renderTask();
+
   // listen and render new  task submission
 
   form.addEventListener("submit", (e) => {
@@ -15,19 +16,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (todoInput) {
       // retrieve old task if available 0r create a new one
-      renderTask();
+      const storedTask = localStorage.getItem("newTask");
+      let taskList = storedTask ? JSON.parse(storedTask) : [];
+      taskList.push({ task: todoInput });
+
+      localStorage.setItem("newTask", JSON.stringify(taskList));
       document.getElementById("todoInput").value = "";
+
+      renderTask();
     } else {
       messageBox.innerHTML = `<p> Please input a task in the box above</p>
 `;
     }
   });
   function renderTask() {
-    const storedTask = localStorage.getItem("newTask");
-    let taskList = storedTask ? JSON.parse(storedTask) : [];
-    taskList.push({ task: todoInput });
-
-    localStorage.setItem("newTask", JSON.stringify(taskList));
     const getTask = JSON.parse(localStorage.getItem("newTask"));
     console.log(getTask);
     // manipulate the above objects list, add check box, delete button, and arrange each object as a list
