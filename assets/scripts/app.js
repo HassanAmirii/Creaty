@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // show available task
   renderTask();
+  const allTask = document.querySelectorAll(".deleteBtn");
 
   // listen and render new  task submission
 
@@ -29,16 +30,27 @@ document.addEventListener("DOMContentLoaded", () => {
 `;
     }
   });
+
+  // Get task from storage manipulate all and show on screen
   function renderTask() {
     const getTask = JSON.parse(localStorage.getItem("newTask"));
     console.log(getTask);
     // manipulate the above objects list, add check box, delete button, and arrange each object as a list
     const arrangeGetTask = getTask
-      .map(function (taskItem) {
-        return `<p><input id="taskCheckBox" type="checkbox"> ${taskItem.task} <button id="deleteTask">delete</button></p>`;
+      .map(function (taskItem, index) {
+        return `<p><input class="CheckState" data-index =${index} type="checkbox"> ${taskItem.task} <button data-index =${index} class="deleteBtn">delete</button></p>`;
       })
       .join("");
     // render task on screen
     taskBox.innerHTML = arrangeGetTask;
   }
+
+  allTask.forEach(function (btn) {
+    btn.addEventListener("click", (e) => {
+      const index = Number(btn.dataset.index);
+      console.log(index);
+    });
+  });
+
+  // Get task from storage delete selected one and show the rest on screen
 });
