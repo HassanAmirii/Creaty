@@ -54,7 +54,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const CheckState = document.querySelectorAll(".CheckState");
     CheckState.forEach(function (checkItem) {
       checkItem.addEventListener("change", (e) => {
-        countTask();
+        let taskCounter = 0;
+        CheckState.forEach(function (checkItem) {
+          if (checkItem.checked) {
+            taskCounter += 1;
+            taskCount.innerHTML = `<p> ${taskCounter}/ ${CheckState.length}  task completed </p>
+`;
+          } else {
+            taskCount.innerHTML = `<p> ${taskCounter} tasks completed </p>
+`;
+          }
+        });
       });
     });
   }
@@ -67,17 +77,5 @@ document.addEventListener("DOMContentLoaded", () => {
     taskList.splice(index, 1);
     localStorage.setItem("newTask", JSON.stringify(taskList));
     renderTask();
-  }
-
-  function countTask() {
-    let taskCounter = 0;
-    if (checkItem.checked) {
-      taskCounter += 1;
-      taskCount.innerHTML = `<p> ${taskCounter}/ ${CheckState.length}  task completed </p>
-`;
-    } else {
-      taskCount.innerHTML = `<p> ${taskCounter} tasks completed </p>
-`;
-    }
   }
 });
