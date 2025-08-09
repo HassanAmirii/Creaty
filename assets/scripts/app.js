@@ -42,10 +42,19 @@ document.addEventListener("DOMContentLoaded", () => {
       .join("");
     taskBox.innerHTML = arrangeGetTask;
     messageBox.innerHTML = "";
+
+    // delete a task
     const allTask = document.querySelectorAll(".deleteBtn");
     allTask.forEach((btn) => {
       btn.addEventListener("click", (e) => {
         deleteTask(Number(btn.dataset.index));
+      });
+    });
+
+    const CheckState = document.querySelectorAll(".CheckState");
+    CheckState.forEach(function (checkItem) {
+      checkItem.addEventListener("change", (e) => {
+        countTask();
       });
     });
   }
@@ -58,5 +67,17 @@ document.addEventListener("DOMContentLoaded", () => {
     taskList.splice(index, 1);
     localStorage.setItem("newTask", JSON.stringify(taskList));
     renderTask();
+  }
+
+  function countTask() {
+    let taskCounter = 0;
+    if (checkItem.checked) {
+      taskCounter += 1;
+      taskCount.innerHTML = `<p> ${taskCounter}/ ${CheckState.length}  task completed </p>
+`;
+    } else {
+      taskCount.innerHTML = `<p> ${taskCounter} tasks completed </p>
+`;
+    }
   }
 });
