@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const taskBox = document.getElementById("taskBox");
   const form = document.getElementById("form");
   const taskCountBox = document.getElementById("taskCountBox");
+  let taskStorage;
 
   // show available task
   renderTask();
@@ -17,8 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (todoInput) {
       // retrieve old task if available 0r create a new one
-      const storedTask = localStorage.getItem("newTask");
-      let taskList = storedTask ? JSON.parse(storedTask) : [];
+
+      let taskList = taskStorage ? JSON.parse(taskStorage) : [];
       taskList.push({ task: todoInput });
 
       localStorage.setItem("newTask", JSON.stringify(taskList));
@@ -33,7 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // show available task in storage
   function renderTask() {
-    const getTask = JSON.parse(localStorage.getItem("newTask"));
+    taskStorage = localStorage.getItem("newTask");
+    const getTask = JSON.parse(taskStorage);
     const CleanUpTask = getTask
       .map(function (taskItem, index) {
         return `<p><input class="checkBOX" data-index =${index} type="checkbox"> ${taskItem.task} <button data-index =${index} class="deleteBtn">delete</button></p>`;
@@ -44,31 +46,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     deleteTask();
     CountCompletedTaskAndRender();
+  }
 
-    function deleteTask() {
-      const allTask = document.querySelectorAll(".deleteBtn");
-      allTask.forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          const index = btn.dataset.index;
-          const fromStorage = localStorage.getItem("newTask");
-          let taskList = fromStorage ? JSON.parse(fromStorage) : [];
-          taskList.splice(index, 1);
-          localStorage.setItem("newTask", JSON.stringify(taskList));
-          renderTask();
-        });
+  function deleteTask() {
+    const allTask = document.querySelectorAll(".deleteBtn");
+    allTask.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const index = btn.dataset.index;
+        let taskList = taskStorage ? JSON.parse(taskStorage) : [];
+        taskList.splice(index, 1);
+        localStorage.setItem("newTask", JSON.stringify(taskList));
+        renderTask();
       });
-    }
+    });
+  }
 
-    function CountCompletedTaskAndRender() {
-      let taskCounter;
-      const checkBOX = document.querySelectorAll(".checkBOX");
-      checkBOX.forEach(function (checkBoxItem) {
-        checkBoxItem.addEventListener("change", () => {
-          taskCounter =
-            checkBoxItem.checked == true ? taskCounter++ : taskCounter--;
-          taskCountBox.innerHTML = `<p> ${taskCounter} / ${checkBOX.length} completed</p>`;
-        });
+  function CountCompletedTaskAndRender() {
+    let taskCounter;
+    const checkBOX = document.querySelectorAll(".checkBOX");
+    checkBOX.forEach(function (checkBoxItem) {
+      checkBoxItem.addEventListener("change", (e) => {
+        taskCounter =
+          checkBoxItem.checked == true ? taskCounter++ : taskCounter--;
+        taskCountBox.innerHTML = `<p> ${taskCounter} / ${checkBOX.length} completed</p>`;
+        renderTask();
       });
-    }
+    });
   }
 });
