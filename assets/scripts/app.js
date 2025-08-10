@@ -60,21 +60,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function CountCompletedTaskAndRender() {
-      let taskCounter = 0;
+      let taskCounter;
       const checkBOX = document.querySelectorAll(".checkBOX");
       checkBOX.forEach(function (checkBoxItem) {
         checkBoxItem.addEventListener("change", () => {
-          if (checkBoxItem.checked == true) {
-            taskCounter++;
-          } else {
-            taskCounter--;
-          }
+          taskCounter =
+            checkBoxItem.checked == true ? taskCounter++ : taskCounter--;
           taskCountBox.innerHTML = `<p> ${taskCounter} / ${checkBOX.length} completed</p>`;
-          renderTask();
         });
       });
     }
   }
-
-  // Get task from storage > delete selected one >  show the rest on screen
 });
