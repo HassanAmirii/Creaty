@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .join("");
     taskBox.innerHTML = CleanUpTask;
-
     messageBox.innerHTML = "";
   }
 
@@ -57,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-  deleteTask();
 
   function CountCompletedTaskAndRender() {
     let taskCounter = 0;
@@ -69,5 +67,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     taskCountBox.innerHTML = `<p> ${taskCounter} / ${checkBOX.length} completed</p>`;
   }
-  CountCompletedTaskAndRender();
 });
