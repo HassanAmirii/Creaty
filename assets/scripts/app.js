@@ -5,9 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const taskBox = document.getElementById("taskBox");
   const form = document.getElementById("form");
   const taskCountBox = document.getElementById("taskCountBox");
-  let taskStorage;
-  let isComplete = document.querySelectorAll(".checkBOX");
-
+  let checkBOX = document.querySelectorAll(".checkBOX");
+  let taskCounter = 0;
   // show available task
   renderTask();
 
@@ -17,8 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     let todoInput = document.getElementById("todoInput").value;
 
-    if (todoInput && isComplete) {
+    if (todoInput) {
       // retrieve old task if available 0r create a new one
+      let taskStorage = localStorage.getItem("newTask");
 
       let taskList = taskStorage ? JSON.parse(taskStorage) : [];
       taskList.push({ task: todoInput, isComplete: false });
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // show available task in storage
   function renderTask() {
-    taskStorage = localStorage.getItem("newTask");
+    let taskStorage = localStorage.getItem("newTask");
     const getTask = JSON.parse(taskStorage);
     const CleanUpTask = getTask
       .map(function (taskItem, index) {
@@ -54,6 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
     allTask.forEach((btn) => {
       btn.addEventListener("click", (e) => {
         const index = btn.dataset.index;
+        let taskStorage = localStorage.getItem("newTask");
+
         let taskList = taskStorage ? JSON.parse(taskStorage) : [];
         taskList.splice(index, 1);
         localStorage.setItem("newTask", JSON.stringify(taskList));
@@ -63,20 +65,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function CountCompletedTaskAndRender() {
-    let taskCounter = 0;
-    isComplete.forEach(function (checkBoxItem) {
+    checkBOX.forEach(function (checkBoxItem) {
       checkBoxItem.addEventListener("change", (e) => {
         if (checkBoxItem.checked == true) {
           taskCounter++;
           const index = checkBoxItem.dataset.index;
+          let taskStorage = localStorage.getItem("newTask");
 
-          taskList = taskStorage ? JSON.parse(taskStorage) : [];
-          taskList[index][isComplete] = true;
+          let taskList = taskStorage ? JSON.parse(taskStorage) : [];
+          const updateChange = (taskList[index].isComplete = true);
+          if (updateChange) checkBoxItem.checked = true;
+          localStorage.setItem("newTask", JSON.stringify(taskList));
+          taskCountBox.innerHTML = `<p> ${taskCounter} / ${checkBOX.length} completed</p>`;
+
+          renderTask();
+        } else {
+          taskCounter--;
         }
-        // taskCounter =
-        //   checkBoxItem.checked == true ? taskCounter++ : taskCounter--;
-        // taskCountBox.innerHTML = `<p> ${taskCounter} / ${checkBOX.length} completed</p>`;
-        // renderTask();
       });
     });
   }
