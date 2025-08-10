@@ -67,4 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     taskCountBox.innerHTML = `<p> ${taskCounter} / ${checkBOX.length} completed</p>`;
   }
+
+  taskBox.addEventListener("change", (e) => {
+    deleteTask();
+    CountCompletedTaskAndRender();
+  });
 });
