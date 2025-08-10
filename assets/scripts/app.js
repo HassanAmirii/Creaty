@@ -41,35 +41,40 @@ document.addEventListener("DOMContentLoaded", () => {
       .join("");
     taskBox.innerHTML = CleanUpTask;
     messageBox.innerHTML = "";
+
+    deleteTask();
+    CountCompletedTaskAndRender();
+
+    function deleteTask() {
+      const allTask = document.querySelectorAll(".deleteBtn");
+      allTask.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const index = btn.dataset.index;
+          const fromStorage = localStorage.getItem("newTask");
+          let taskList = fromStorage ? JSON.parse(fromStorage) : [];
+          taskList.splice(index, 1);
+          localStorage.setItem("newTask", JSON.stringify(taskList));
+          renderTask();
+        });
+      });
+    }
+
+    function CountCompletedTaskAndRender() {
+      let taskCounter = 0;
+      const checkBOX = document.querySelectorAll(".checkBOX");
+      checkBOX.forEach(function (checkBoxItem) {
+        checkBoxItem.addEventListener("change", () => {
+          if (checkBoxItem.checked == true) {
+            taskCounter++;
+          } else {
+            taskCounter--;
+          }
+          taskCountBox.innerHTML = `<p> ${taskCounter} / ${checkBOX.length} completed</p>`;
+          renderTask();
+        });
+      });
+    }
   }
 
   // Get task from storage > delete selected one >  show the rest on screen
-  function deleteTask() {
-    const allTask = document.querySelectorAll(".deleteBtn");
-    allTask.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        const index = btn.dataset.index;
-        const fromStorage = localStorage.getItem("newTask");
-        let taskList = fromStorage ? JSON.parse(fromStorage) : [];
-        taskList.splice(index, 1);
-        localStorage.setItem("newTask", JSON.stringify(taskList));
-      });
-    });
-  }
-
-  function CountCompletedTaskAndRender() {
-    let taskCounter = 0;
-    const checkBOX = document.querySelectorAll(".checkBOX");
-    checkBOX.forEach(function (checkBoxItem) {
-      checkBoxItem.addEventListener("change", () => {
-        if (checkBoxItem.checked) taskCounter++;
-      });
-    });
-    taskCountBox.innerHTML = `<p> ${taskCounter} / ${checkBOX.length} completed</p>`;
-  }
-
-  taskBox.addEventListener("change", (e) => {
-    deleteTask();
-    CountCompletedTaskAndRender();
-  });
 });
