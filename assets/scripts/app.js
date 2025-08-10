@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form");
   const taskCountBox = document.getElementById("taskCountBox");
   let taskStorage;
+  let isComplete = document.querySelectorAll(".checkBOX");
 
   // show available task
   renderTask();
@@ -16,11 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     let todoInput = document.getElementById("todoInput").value;
 
-    if (todoInput) {
+    if (todoInput && isComplete) {
       // retrieve old task if available 0r create a new one
 
       let taskList = taskStorage ? JSON.parse(taskStorage) : [];
-      taskList.push({ task: todoInput });
+      taskList.push({ task: todoInput, isComplete: false });
 
       localStorage.setItem("newTask", JSON.stringify(taskList));
       document.getElementById("todoInput").value = "";
@@ -62,14 +63,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function CountCompletedTaskAndRender() {
-    let taskCounter;
-    const checkBOX = document.querySelectorAll(".checkBOX");
-    checkBOX.forEach(function (checkBoxItem) {
+    let taskCounter = 0;
+    isComplete.forEach(function (checkBoxItem) {
       checkBoxItem.addEventListener("change", (e) => {
-        taskCounter =
-          checkBoxItem.checked == true ? taskCounter++ : taskCounter--;
-        taskCountBox.innerHTML = `<p> ${taskCounter} / ${checkBOX.length} completed</p>`;
-        renderTask();
+        if (checkBoxItem.checked == true) {
+          taskCounter++;
+          const index = checkBoxItem.dataset.index;
+
+          taskList = taskStorage ? JSON.parse(taskStorage) : [];
+          taskList[index][isComplete] = true;
+        }
+        // taskCounter =
+        //   checkBoxItem.checked == true ? taskCounter++ : taskCounter--;
+        // taskCountBox.innerHTML = `<p> ${taskCounter} / ${checkBOX.length} completed</p>`;
+        // renderTask();
       });
     });
   }
