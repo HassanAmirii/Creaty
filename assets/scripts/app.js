@@ -46,9 +46,19 @@ document.addEventListener("DOMContentLoaded", () => {
     messageBox.innerHTML = "";
 
     let taskList = taskStorage ? JSON.parse(taskStorage) : [];
-    taskList.filter(function (checedItem) {
-      return checedItem.lenght;
+
+    const completedTasks = taskList.filter(function (taskItem) {
+      return taskItem.isComplete === true;
     });
+
+    const completedCount = completedTasks.length;
+
+    const totalCount = taskList.length;
+    if (taskBox.innerHTML) {
+      taskCountBox.innerHTML = `<p>${completedCount} / ${totalCount} completed</p>`;
+    } else {
+      taskCountBox.innerHTML = "";
+    }
 
     deleteTask();
     CountCompletedTaskAndRender();
