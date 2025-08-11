@@ -1,0 +1,13 @@
+Test Criteria (Must Pass)
+
+    Reloading the page doesn’t erase tasks
+
+    Each task has a checkbox and delete button
+
+    Counter reflects completed/total tasks
+
+    No duplicate tasks unless intentional
+
+    Code is in one JS file, modularized by function
+
+    Deployed and link submitted

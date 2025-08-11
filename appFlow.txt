@@ -1,5 +1,0 @@
-user open site 
-
-fill the input Bar to add a new task
-     Task auto append as table data with  side buttons (modify)  (delete)
-     
