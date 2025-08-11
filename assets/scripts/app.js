@@ -44,6 +44,12 @@ document.addEventListener("DOMContentLoaded", () => {
       .join("");
     taskBox.innerHTML = CleanUpTask;
     messageBox.innerHTML = "";
+
+    let taskList = taskStorage ? JSON.parse(taskStorage) : [];
+    taskList.filter(function (checedItem) {
+      return checedItem.lenght;
+    });
+
     deleteTask();
     CountCompletedTaskAndRender();
   }
