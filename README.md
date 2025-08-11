@@ -2,6 +2,12 @@
 
 This project is a simple, yet robust, To-Do List application built entirely with vanilla JavaScript. It allows users to manage their daily tasks with features like adding, deleting, and marking tasks as complete, all while ensuring data persists even after the browser is refreshed.
 
+### Visuals
+
+The application's interface is clean and straightforward, designed for an easy user experience.
+
+<img src="/assets/img/creatyMobile design.png" width="400" height="900" alt="">
+
 ### Features
 
 - **Persistent Storage:** Tasks are automatically saved to your browser's local storage, so your list remains intact even if you close and reopen the application.
@@ -25,10 +31,6 @@ This project is a simple, yet robust, To-Do List application built entirely with
 Click the checkbox next to a task to mark it as complete or incomplete.
 
 Click the delete button (x) to remove a task from the list.
-
-### Visuals
-
-The application's interface is clean and straightforward, designed for an easy user experience.
 
 ### Technologies Used
 
