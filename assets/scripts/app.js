@@ -42,31 +42,34 @@ document.addEventListener("DOMContentLoaded", () => {
   // show available task in storage
   function renderTask() {
     let taskStorage = localStorage.getItem("newTask");
-    const getTask = JSON.parse(taskStorage);
-    const CleanUpTask = getTask
-      .map(function (taskItem, index) {
-        const isChecked = taskItem.isComplete ? "checked" : "";
-        return `<p><input class="checkBOX" data-index =${index} type="checkbox" ${isChecked}> ${taskItem.task} <button data-index =${index} class="deleteBtn">delete</button></p>`;
-      })
-      .join("");
-    taskBox.innerHTML = CleanUpTask;
-    messageBox.innerHTML = "";
+    if (taskStorage) {
+      const getTask = JSON.parse(taskStorage);
+      const CleanUpTask = getTask
+        .map(function (taskItem, index) {
+          const isChecked = taskItem.isComplete ? "checked" : "";
+          return `<p><input class="checkBOX" data-index =${index} type="checkbox" ${isChecked}> ${taskItem.task} <button data-index =${index} class="deleteBtn">delete</button></p>`;
+        })
+        .join("");
+      taskBox.innerHTML = CleanUpTask;
+      messageBox.innerHTML = "";
 
-    let taskList = taskStorage ? JSON.parse(taskStorage) : [];
+      let taskList = taskStorage ? JSON.parse(taskStorage) : [];
 
-    const completedTasks = taskList.filter(function (taskItem) {
-      return taskItem.isComplete === true;
-    });
+      const completedTasks = taskList.filter(function (taskItem) {
+        return taskItem.isComplete === true;
+      });
 
-    const completedCount = completedTasks.length;
+      const completedCount = completedTasks.length;
 
-    const totalCount = taskList.length;
-    if (taskBox.innerHTML) {
-      taskCountBox.innerHTML = `<p>${completedCount} / ${totalCount} completed</p>`;
+      const totalCount = taskList.length;
+      if (taskBox.innerHTML) {
+        taskCountBox.innerHTML = `<p>${completedCount} / ${totalCount} completed</p>`;
+      } else {
+        taskCountBox.innerHTML = "";
+      }
     } else {
-      taskCountBox.innerHTML = "";
+      taskBox.innerHTML = `<p>PLEASE ADD A TASK :( </p>`;
     }
-
     deleteTask();
     CountCompletedTaskAndRender();
   }
