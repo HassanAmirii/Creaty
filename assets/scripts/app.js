@@ -13,14 +13,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    let todoInput = document.getElementById("todoInput").value;
+    let todoInput = document.getElementById("todoInput").value.toLowerCase();
 
     if (todoInput) {
       // retrieve old task if available 0r create a new one
       let taskStorage = localStorage.getItem("newTask");
 
       let taskList = taskStorage ? JSON.parse(taskStorage) : [];
-      taskList.push({ task: todoInput, isComplete: false });
+      const allTaskList = taskList.find(function (item) {
+        return item.task === todoInput;
+      });
+      if (allTaskList) {
+        alert("Task already exist :)");
+      } else {
+        taskList.push({ task: todoInput, isComplete: false });
+      }
 
       localStorage.setItem("newTask", JSON.stringify(taskList));
       document.getElementById("todoInput").value = "";
