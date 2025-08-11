@@ -13,7 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    let todoInput = document.getElementById("todoInput").value.toLowerCase();
+    let todoInput = document
+      .getElementById("todoInput")
+      .value.toLowerCase()
+      .trim();
 
     if (todoInput) {
       // retrieve old task if available 0r create a new one
