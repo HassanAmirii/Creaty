@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         taskCountBox.innerHTML = "";
       }
     } else {
-      taskBox.innerHTML = `<p>Add a new task dear human  ⎛⎝ ≽  >  ⩊   < ≼ ⎠⎞</p>`;
+      taskBox.innerHTML = `<p>zero task in storage, please add a new task to continue!</p>`;
     }
     deleteTask();
     CountCompletedTaskAndRender();
