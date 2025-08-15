@@ -29,8 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (taskAlreadyExist) {
         alert("Task already exist :)");
       } else {
-        taskList.push({ task: todoInput, isComplete: false });
-        taskList.reverse();
+        taskList.unshift({ task: todoInput, isComplete: false });
       }
 
       localStorage.setItem("newTask", JSON.stringify(taskList));
