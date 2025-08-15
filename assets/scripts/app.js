@@ -23,10 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
       let taskStorage = localStorage.getItem("newTask");
 
       let taskList = taskStorage ? JSON.parse(taskStorage) : [];
-      const allTaskList = taskList.find(function (item) {
+      const taskAlreadyExist = taskList.find(function (item) {
         return item.task === todoInput;
       });
-      if (allTaskList) {
+      if (taskAlreadyExist) {
         alert("Task already exist :)");
       } else {
         taskList.push({ task: todoInput, isComplete: false });
