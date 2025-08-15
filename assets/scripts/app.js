@@ -51,9 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
         .map(function (taskItem, index) {
           const isChecked = taskItem.isComplete ? "checked" : "";
           if (isChecked) {
-            return `<p id="checkedTask"><input class="checkBOX" data-index =${index} type="checkbox" ${isChecked}> <span class="checkedTaskText">${taskItem.task}</span> <button data-index =${index} class="deleteBtn">delete</button></p>`;
+            return `<p id="checkedTask"><input class="checkBOX" data-index =${index} type="checkbox" ${isChecked}> <span class="checkedTaskText">${taskItem.task}</span> <button data-index =${index} class="deleteBtn">      <img src="assets/icons/trash (1).svg" alt="" />
+</button></p>`;
           } else {
-            return `<p id="UncheckedTask"><input class="checkBOX" data-index =${index} type="checkbox" ${isChecked}> <span class="UncheckedTaskText">${taskItem.task}</span> <button data-index =${index} class="deleteBtn">delete</button></p>`;
+            return `<p id="UncheckedTask"><input class="checkBOX" data-index =${index} type="checkbox" ${isChecked}> <span class="UncheckedTaskText">${taskItem.task}</span> <button data-index =${index} class="deleteBtn">      <img src="assets/icons/trash (1).svg" alt="" />
+</button></p>`;
           }
         })
         .join("");
