@@ -66,6 +66,9 @@ form button {
 form button:hover {
   background-color: #c0a66a;
 }
+#checkedTask {
+  text-decoration: line-through;
+}
 
 #taskBox p {
   display: flex;
@@ -86,6 +89,7 @@ form button:hover {
   border: none;
   color: #d1b97d;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .deleteBtn:hover {

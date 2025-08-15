@@ -50,7 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const CleanUpTask = getTask
         .map(function (taskItem, index) {
           const isChecked = taskItem.isComplete ? "checked" : "";
-          return `<p><input class="checkBOX" data-index =${index} type="checkbox" ${isChecked}> ${taskItem.task} <button data-index =${index} class="deleteBtn">delete</button></p>`;
+          if (isChecked) {
+            return `<p id="checkedTask"><input class="checkBOX" data-index =${index} type="checkbox" ${isChecked}> ${taskItem.task} <button data-index =${index} class="deleteBtn">delete</button></p>`;
+          } else {
+            return `<p id="UncheckedTask"><input class="checkBOX" data-index =${index} type="checkbox" ${isChecked}> ${taskItem.task} <button data-index =${index} class="deleteBtn">delete</button></p>`;
+          }
         })
         .join("");
       taskBox.innerHTML = CleanUpTask;
@@ -101,7 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
           let taskList = taskStorage ? JSON.parse(taskStorage) : [];
           taskList[index].isComplete = true;
           localStorage.setItem("newTask", JSON.stringify(taskList));
-
           renderTask();
         } else {
           let taskStorage = localStorage.getItem("newTask");
