@@ -51,9 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
         .map(function (taskItem, index) {
           const isChecked = taskItem.isComplete ? "checked" : "";
           if (isChecked) {
-            return `<p id="checkedTask"><input class="checkBOX" data-index =${index} type="checkbox" ${isChecked}> <span class="checkedTaskText">${taskItem.task}</span> <button data-index =${index} class="deleteBtn">delete</button></p>`;
+            return `<p id="checkedTask"><input class="checkBOX" data-index =${index} type="checkbox" ${isChecked}> <span class="checkedTaskText">${taskItem.task}</span> <button data-index =${index} class="editBtn">edit</button> <button data-index =${index} class="deleteBtn">delete</button></p>`;
           } else {
-            return `<p id="UncheckedTask"><input class="checkBOX" data-index =${index} type="checkbox" ${isChecked}> <span class="UncheckedTaskText">${taskItem.task}</span> <button data-index =${index} class="deleteBtn">delete</button></p>`;
+            return `<p id="UncheckedTask"><input class="checkBOX" data-index =${index} type="checkbox" ${isChecked}> <span class="UncheckedTaskText">${taskItem.task}</span><button data-index =${index} class="editBtn">edit</button> <button data-index =${index} class="deleteBtn">delete</button></p>`;
           }
         })
         .join("");
@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
       taskBox.innerHTML = "";
     }
     deleteTask();
+    editTask();
     CountCompletedTaskAndRender();
   }
 
@@ -90,6 +91,32 @@ document.addEventListener("DOMContentLoaded", () => {
         let taskList = taskStorage ? JSON.parse(taskStorage) : [];
         taskList.splice(index, 1);
         localStorage.setItem("newTask", JSON.stringify(taskList));
+        renderTask();
+      });
+    });
+  }
+  function editTask() {
+    const allTask = document.querySelectorAll(".editBtn");
+    allTask.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const index = btn.dataset.index;
+        let taskStorage = localStorage.getItem("newTask");
+        let taskList = taskStorage ? JSON.parse(taskStorage) : [];
+        const reQuery = window.prompt();
+        if ((reQuery = "")) renderTask();
+        const taskAlreadyExist = taskList.find(function (item) {
+          return item.task === reQuery;
+        });
+        if (taskAlreadyExist) {
+          alert("Task already exist :)");
+        } else {
+          taskList.splice(index, 1);
+
+          taskList.unshift({ task: reQuery, isComplete: false });
+        }
+
+        localStorage.setItem("newTask", JSON.stringify(taskList));
+
         renderTask();
       });
     });

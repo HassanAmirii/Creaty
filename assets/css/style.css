@@ -69,7 +69,9 @@ form button:hover {
 .checkedTaskText {
   text-decoration: line-through;
 }
-
+#checkedTask {
+  opacity: 0.7;
+}
 #taskBox p {
   display: flex;
   align-items: center;
@@ -84,15 +86,20 @@ form button:hover {
   accent-color: #a38c56;
 }
 
-.deleteBtn {
+.deleteBtn,
+.editBtn {
   background: none;
   border: none;
   color: #d1b97d;
   cursor: pointer;
 }
 
+.editBtn:hover {
+  color: rgb(0, 255, 0);
+}
+
 .deleteBtn:hover {
-  color: #e2c989;
+  color: red;
 }
 
 footer {
