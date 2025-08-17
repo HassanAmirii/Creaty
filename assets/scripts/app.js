@@ -110,9 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (taskAlreadyExist) {
           alert("Task already exist :)");
         } else {
+          const taskCurrentState = taskList[index].isComplete;
           taskList.splice(index, 1);
-
-          taskList.unshift({ task: reQuery, isComplete: false });
+          taskList.unshift({ task: reQuery, isComplete: taskCurrentState });
         }
 
         localStorage.setItem("newTask", JSON.stringify(taskList));
