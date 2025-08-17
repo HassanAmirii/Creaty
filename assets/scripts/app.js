@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const index = btn.dataset.index;
         let taskStorage = localStorage.getItem("newTask");
         let taskList = taskStorage ? JSON.parse(taskStorage) : [];
-        const reQuery = window.prompt();
+        const reQuery = window.prompt().toLowerCase().trim();
         if (reQuery == "") renderTask();
         const taskAlreadyExist = taskList.find(function (item) {
           return item.task === reQuery;
