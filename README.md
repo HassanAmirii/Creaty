@@ -6,8 +6,6 @@ This project is a simple, yet robust, To-Do List application built entirely with
 
 The application's interface is clean and straightforward, designed for an easy user experience.
 
-<img src="/assets/img/creatyMobile design.png" width="400" height="900" alt="">
-
 ### Features
 
 - **Persistent Storage:** Tasks are automatically saved to your browser's local storage, so your list remains intact even if you close and reopen the application.
